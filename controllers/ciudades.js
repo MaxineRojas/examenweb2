@@ -2,29 +2,30 @@ const path = require("path");
 const Ciudad = require("../utils/database").models.ciudad;
 
 exports.postAgregarCiudad = (req, res) => {
-  console.log(req.body);
-  const found = Ciudad.findOne({
-    where: {
-      nombre: req.body.nombre,
-      pais: req.body.pais,
-    },
-  });
-  if (found === null) {
-    Ciudad.create(req.body)
-      .then((result) => {
-        console.log("Ciudad creada");
-        res.json({ estado: "aceptada" });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.json({ estado: "error" });
-      });
-  } else {
-    console.log("La ciudad ya existe");
-    res.json({ estado: "La ciudad ya existe" });
-    //Aqui se actualiza el contador
-  }
+  console.log(req.body)
+  Ciudad.findOne({
+      where : {
+          nombre: req.body.nombre,
+          pais : req.body.pais
+      }
+  }).then((existe)=>{
+      if (existe == null) {
+        Ciudad.create(req.body)
+        .then(result => {
+          console.log("Ciudad creada")
+          res.json({ estado: "aceptada" })
+        })
+        .catch((err) => {
+          console.log(err)
+          res.json({ estado: "error" })
+        })
+      } else {
+          console.log("Ya existe")
+          res.json({ estado: "Ya existe" })
+        }
+  })
 };
+
 
 exports.getConsultarCiudades = (req, res) => {
   Ciudad.findAll()
@@ -37,6 +38,7 @@ exports.getConsultarCiudades = (req, res) => {
       res.json({ estado: "error" });
     });
 };
+
 
 exports.postBorrarCiudad = (req, res) => {
   console.log(req.body);
@@ -54,6 +56,8 @@ exports.postBorrarCiudad = (req, res) => {
       res.json({ estado: "error" });
     });
 };
+
+
 exports.postActualizarCiudad = (req, res) => {
   console.log(req.body);
 
@@ -78,3 +82,21 @@ exports.postActualizarCiudad = (req, res) => {
       res.json({ estado: "error" });
     });
 };
+
+
+exports.getConsultarPais = (req, res) => {
+    Ciudad.findAll(
+        {
+            where : {
+                pais : req.body.pais
+            }
+        })
+      .then((ciudad) => {
+        console.log(ciudad);
+        res.json(ciudad);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json({ estado: "error" });
+      });
+  };

@@ -23,7 +23,7 @@ for(const modelDefiner of modelDefiners){
 }
 
 //Realizar las relaciones entre las tablas de la BD
-aplicarRelaciones(sequelize)
+//aplicarRelaciones(sequelize)
 
 //Para poder usar en archivo externos la conexion
 module.exports = sequelize;

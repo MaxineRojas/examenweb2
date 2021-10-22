@@ -11,5 +11,7 @@ router.get('/consultarCiudades',ciudadController.getConsultarCiudades)
 router.post('/borrarCiudad',ciudadController.postBorrarCiudad)
 //Actualizar ciudad UPDATE
 router.post('/actualizarCiudad',ciudadController.postActualizarCiudad)
+//Servicio para buscar por Pais
+router.get('/consultarPais',ciudadController.getConsultarPais)
 
 module.exports = router

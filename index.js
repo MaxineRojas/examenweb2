@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.use("/ciudads",ciudadRoutes);
+app.use("/ciudades",ciudadRoutes);
 
 //Que la aplicación escuche peticiones
 sequelize.sync()
